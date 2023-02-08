@@ -1,2 +1,5 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using ConsoleBasedRpgGame.Hero;
+
+Hero Marco = new Mage("Marco");
+Marco.LevelUp();
+
