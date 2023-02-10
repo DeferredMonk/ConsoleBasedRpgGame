@@ -1,6 +1,6 @@
 ﻿namespace ConsoleBasedRpgGame.Hero.Items.ItemsEnums
 {
-    internal enum Slots
+    public enum Slots
     {
         Weapon,
         Head,

@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ConsoleBasedRpgGame.Hero.CharacterRoles
+﻿namespace ConsoleBasedRpgGame.Hero.CharacterRoles
 {
     internal class Warrior : Hero
     {
-        private Attribute onLevelUp = new(5, 2, 1);
         public Warrior(string name) : base(name)
         {
             LevelAttribute = new(3, 2, 1);
@@ -16,7 +9,7 @@ namespace ConsoleBasedRpgGame.Hero.CharacterRoles
         public override void LevelUp()
         {
             base.LevelUp();
-            this.LevelAttribute += this.onLevelUp;
+            this.LevelAttribute += new Attribute(5, 2, 1);
         }
     }
 }

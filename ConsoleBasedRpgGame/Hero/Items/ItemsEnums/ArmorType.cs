@@ -1,6 +1,6 @@
 ﻿namespace ConsoleBasedRpgGame.Hero.Items.ItemsEnums
 {
-    internal enum ArmorType
+    public enum ArmorType
     {
         Cloth,
         Leather,

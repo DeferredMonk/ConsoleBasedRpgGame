@@ -1,6 +1,6 @@
 ﻿namespace ConsoleBasedRpgGame.Hero.Items.ItemsEnums
 {
-    internal enum WeaponType
+    public enum WeaponType
     {
         Axes,
         Bows,
