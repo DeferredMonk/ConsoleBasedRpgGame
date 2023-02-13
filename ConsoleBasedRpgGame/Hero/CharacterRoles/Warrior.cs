@@ -9,7 +9,7 @@
         public override void LevelUp()
         {
             base.LevelUp();
-            this.LevelAttribute += new Attribute(5, 2, 1);
+            this.LevelAttribute += new HeroAttribute(5, 2, 1);
         }
     }
 }
