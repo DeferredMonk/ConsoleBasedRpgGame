@@ -9,6 +9,7 @@ namespace ConsoleBasedRpgGame.Hero.CharacterRoles
         public Mage(string name) : base(name)
         {
             this.LevelAttribute = new(1, 1, 8);
+
             setValidEquipTypes(validWeaponTypes, validArmorTypes);
         }
         public override void LevelUp()

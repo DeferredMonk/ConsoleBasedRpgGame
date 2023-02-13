@@ -19,7 +19,6 @@ namespace ConsoleBasedRpgGame.Hero
             this.Name = name;
             this.Level = 1;
             setEquipmentStartingValues();
-
         }
         public virtual void LevelUp()
         {
