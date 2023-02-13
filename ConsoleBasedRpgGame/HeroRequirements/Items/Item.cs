@@ -1,6 +1,6 @@
-﻿using ConsoleBasedRpgGame.Hero.Items.ItemsEnums;
+﻿using ConsoleBasedRpgGame.HeroRequirements.Items.ItemsEnums;
 
-namespace ConsoleBasedRpgGame.Hero.Items
+namespace ConsoleBasedRpgGame.HeroRequirements.Items
 {
     public abstract class Item
     {

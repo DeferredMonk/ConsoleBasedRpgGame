@@ -1,4 +1,4 @@
-﻿namespace ConsoleBasedRpgGame.Hero.Items.ItemsEnums
+﻿namespace ConsoleBasedRpgGame.HeroRequirements.Items.ItemsEnums
 {
     public enum WeaponType
     {

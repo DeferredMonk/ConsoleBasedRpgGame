@@ -1,8 +1,8 @@
-﻿using ConsoleBasedRpgGame.Hero.Items.ItemsEnums;
+﻿using ConsoleBasedRpgGame.HeroRequirements.Items.ItemsEnums;
 
-namespace ConsoleBasedRpgGame.Hero.Items
+namespace ConsoleBasedRpgGame.HeroRequirements.Items
 {
-    internal class Armor : Item
+    public class Armor : Item
     {
         public Armor(string name, int requiredLevel, Slots slot, ArmorType armorType, HeroAttribute armorAttribute) : base(name, requiredLevel)
         {
