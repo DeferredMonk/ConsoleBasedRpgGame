@@ -1,3 +1,4 @@
+
 ﻿using ConsoleBasedRpgGame.HeroRequirements;
 using ConsoleBasedRpgGame.HeroRequirements.CharacterRoles;
 using ConsoleBasedRpgGame.HeroRequirements.Items;
@@ -32,5 +33,3 @@ Marco.Damage();
 
 Iida.TotalAttributes();
 Marco.TotalAttributes();
-
-
