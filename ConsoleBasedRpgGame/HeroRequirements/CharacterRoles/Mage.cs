@@ -1,4 +1,5 @@
-﻿using ConsoleBasedRpgGame.HeroRequirements.Items.ItemsEnums;
+﻿using ConsoleBasedRpgGame.HeroRequirements.Items;
+using ConsoleBasedRpgGame.HeroRequirements.Items.ItemsEnums;
 
 namespace ConsoleBasedRpgGame.HeroRequirements.CharacterRoles
 {
@@ -15,6 +16,15 @@ namespace ConsoleBasedRpgGame.HeroRequirements.CharacterRoles
         {
             base.LevelUp();
             this.LevelAttribute += new HeroAttribute(1, 1, 5);
+        }
+
+        public override void Damage()
+        {
+            Weapon weapon = (Weapon)equipment[Slots.Weapon];
+            double WeaponDamage = weapon != null ? weapon.Damage : 1;
+
+            var HeroDamage = WeaponDamage * (1 + LevelAttribute.Intelligence / 100);
+            Console.WriteLine(HeroDamage);
         }
     }
 }

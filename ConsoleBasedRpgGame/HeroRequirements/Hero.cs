@@ -6,7 +6,7 @@ namespace ConsoleBasedRpgGame.HeroRequirements
 {
     public abstract class Hero
     {
-        private Dictionary<Slots, Item?> equipment = new Dictionary<Slots, Item?>();
+        protected Dictionary<Slots, Item?> equipment = new Dictionary<Slots, Item?>();
         protected List<WeaponType> ValidWeaponTypes;
         protected List<ArmorType> ValidArmorTypes;
 
@@ -33,6 +33,7 @@ namespace ConsoleBasedRpgGame.HeroRequirements
                 else if (!ValidWeaponTypes.Contains(weapon.WeaponType)) { throw new InvalidWeaponTypeExeption(weapon, CharacterRole); }
 
                 equipment[0] = weapon;
+                Console.WriteLine($"{weapon.Name} equipped succesfully!");
             }
             catch (RequiredLevelException e) { Console.WriteLine(e.Message); }
             catch (InvalidWeaponTypeExeption e) { Console.WriteLine(e.Message); }
@@ -45,18 +46,23 @@ namespace ConsoleBasedRpgGame.HeroRequirements
                 else if (!ValidArmorTypes.Contains(armor.ArmorType)) { throw new InvalidArmorTypeExeption(armor, CharacterRole); }
 
                 equipment[armor.Slot] = armor;
-                Console.WriteLine(equipment[armor.Slot].Name);
+                Console.WriteLine($"{armor.Name} equipped succesfully!");
             }
             catch (RequiredLevelException e) { Console.WriteLine(e.Message); }
             catch (InvalidArmorTypeExeption e) { Console.WriteLine(e.Message); }
         }
-        public void Damage()
+        public virtual void Damage()
         {
 
         }
         public void TotalAttributes()
         {
-
+            var EquippedArmor = equipment.Where(kvp => kvp.Key != Slots.Weapon).Select(kvp => (Armor?)kvp.Value);
+            Console.WriteLine(EquippedArmor.Aggregate(LevelAttribute, (acc, curr) =>
+            {
+                if (curr != null) return acc + curr.ArmorAttribute;
+                else return acc;
+            }));
         }
         public void Display()
         {
