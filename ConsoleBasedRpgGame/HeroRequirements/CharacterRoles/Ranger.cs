@@ -1,8 +1,9 @@
-﻿using ConsoleBasedRpgGame.HeroRequirements.Items.ItemsEnums;
+﻿using ConsoleBasedRpgGame.HeroRequirements.Items;
+using ConsoleBasedRpgGame.HeroRequirements.Items.ItemsEnums;
 
 namespace ConsoleBasedRpgGame.HeroRequirements.CharacterRoles
 {
-    internal class Ranger : Hero
+    public class Ranger : Hero
     {
         public Ranger(string name) : base(name)
         {
@@ -15,6 +16,13 @@ namespace ConsoleBasedRpgGame.HeroRequirements.CharacterRoles
         {
             base.LevelUp();
             this.LevelAttribute += new HeroAttribute(1, 5, 1);
+        }
+        public override double Damage()
+        {
+            Weapon weapon = (Weapon)equipment[Slots.Weapon];
+            double WeaponDamage = weapon != null ? weapon.Damage : 1;
+
+            return WeaponDamage * (1 + LevelAttribute.Dexterity / 100);
         }
     }
 }

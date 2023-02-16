@@ -19,7 +19,7 @@ Marco.EquipA(Helmet);
 Iida.EquipA(LeatherHelmet);
 Iida.EquipA(Pants);
 Iida.EquipA(Vest);
-for (int i = 0; i < 10; i++)
+for (int i = 0; i < 500; i++)
 {
     Marco.LevelUp();
 }
@@ -32,5 +32,7 @@ Marco.Damage();
 
 Iida.TotalAttributes();
 Marco.TotalAttributes();
+
+Marco.Display();
 
 

@@ -18,13 +18,13 @@ namespace ConsoleBasedRpgGame.HeroRequirements.CharacterRoles
             this.LevelAttribute += new HeroAttribute(1, 1, 5);
         }
 
-        public override void Damage()
+        public override double Damage()
         {
             Weapon weapon = (Weapon)equipment[Slots.Weapon];
             double WeaponDamage = weapon != null ? weapon.Damage : 1;
 
-            var HeroDamage = WeaponDamage * (1 + LevelAttribute.Intelligence / 100);
-            Console.WriteLine(HeroDamage);
+            double HeroDamage = WeaponDamage * (1 + LevelAttribute.Intelligence / 100);
+            return HeroDamage;
         }
     }
 }

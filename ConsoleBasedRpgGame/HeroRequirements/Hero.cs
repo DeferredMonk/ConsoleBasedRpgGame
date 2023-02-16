@@ -1,6 +1,7 @@
 ﻿using ConsoleBasedRpgGame.Exceptions;
 using ConsoleBasedRpgGame.HeroRequirements.Items;
 using ConsoleBasedRpgGame.HeroRequirements.Items.ItemsEnums;
+using System.Text;
 
 namespace ConsoleBasedRpgGame.HeroRequirements
 {
@@ -9,10 +10,11 @@ namespace ConsoleBasedRpgGame.HeroRequirements
         protected Dictionary<Slots, Item?> equipment = new Dictionary<Slots, Item?>();
         protected List<WeaponType> ValidWeaponTypes;
         protected List<ArmorType> ValidArmorTypes;
+        protected StringBuilder SB = new();
 
         public HeroAttribute LevelAttribute { get; set; }
         public int Level { get; set; }
-        public string? Name { get; set; }
+        public string Name { get; set; }
         public string CharacterRole { get; set; }
 
         public Hero(string name)
@@ -51,9 +53,9 @@ namespace ConsoleBasedRpgGame.HeroRequirements
             catch (RequiredLevelException e) { Console.WriteLine(e.Message); }
             catch (InvalidArmorTypeExeption e) { Console.WriteLine(e.Message); }
         }
-        public virtual void Damage()
+        public virtual double Damage()
         {
-
+            return 0;
         }
         public void TotalAttributes()
         {
@@ -66,7 +68,8 @@ namespace ConsoleBasedRpgGame.HeroRequirements
         }
         public void Display()
         {
-
+            SB.Append($"Name: {this.Name}{Environment.NewLine}CLass: {this.CharacterRole}{Environment.NewLine}Level: {this.Level}{Environment.NewLine}Total strength: {this.LevelAttribute.Strength}{Environment.NewLine}Total dexterity: {this.LevelAttribute.Dexterity}{Environment.NewLine}Total intelligence: {this.LevelAttribute.Intelligence}{Environment.NewLine}Damage: {Damage()}");
+            Console.WriteLine(SB.ToString());
         }
         /// <summary>
         /// Adds to equipment dictionary 
