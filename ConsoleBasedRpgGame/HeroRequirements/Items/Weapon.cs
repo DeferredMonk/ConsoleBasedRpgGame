@@ -2,6 +2,9 @@
 
 namespace ConsoleBasedRpgGame.HeroRequirements.Items
 {
+    /// <summary>
+    /// A class to create weapons
+    /// </summary>
     public class Weapon : Item
     {
         public Weapon(string name, int requiredLevel, WeaponType weaponType, int damage) : base(name, requiredLevel)
