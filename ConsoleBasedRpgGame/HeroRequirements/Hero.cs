@@ -1,7 +1,7 @@
-﻿using ConsoleBasedRpgGame.Exceptions;
+﻿using System.Text;
+using ConsoleBasedRpgGame.Exceptions;
 using ConsoleBasedRpgGame.HeroRequirements.Items;
 using ConsoleBasedRpgGame.HeroRequirements.Items.ItemsEnums;
-using System.Text;
 
 namespace ConsoleBasedRpgGame.HeroRequirements
 {
@@ -58,10 +58,10 @@ namespace ConsoleBasedRpgGame.HeroRequirements
                 else return acc;
             });
         }
-        public void Display()
+        public string Display()
         {
-            SB.Append($"Name: {this.Name}{Environment.NewLine}CLass: {this.CharacterRole}{Environment.NewLine}Level: {this.Level}{Environment.NewLine}Total strength: {this.LevelAttribute.Strength}{Environment.NewLine}Total dexterity: {this.LevelAttribute.Dexterity}{Environment.NewLine}Total intelligence: {this.LevelAttribute.Intelligence}{Environment.NewLine}Damage: {Damage()}");
-            Console.WriteLine(SB.ToString());
+            SB.Append($"Name: {this.Name} CLass: {this.CharacterRole} Level: {this.Level} Total strength: {this.LevelAttribute.Strength} Total dexterity: {this.LevelAttribute.Dexterity} Total intelligence: {this.LevelAttribute.Intelligence} Damage: {Damage()}");
+            return SB.ToString();
         }
         /// <summary>
         /// Adds to equipment dictionary 

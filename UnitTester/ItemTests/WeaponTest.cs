@@ -1,7 +1,7 @@
 ﻿using ConsoleBasedRpgGame.HeroRequirements.Items;
 using ConsoleBasedRpgGame.HeroRequirements.Items.ItemsEnums;
 
-namespace UnitTester.NewFolder
+namespace UnitTester.ItemTests
 {
     public class WeaponTest : IDisposable
     {
