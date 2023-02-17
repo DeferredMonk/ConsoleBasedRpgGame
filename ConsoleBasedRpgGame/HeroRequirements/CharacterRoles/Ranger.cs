@@ -22,7 +22,7 @@ namespace ConsoleBasedRpgGame.HeroRequirements.CharacterRoles
             Weapon weapon = (Weapon)equipment[Slots.Weapon];
             double WeaponDamage = weapon != null ? weapon.Damage : 1;
 
-            return WeaponDamage * (1 + LevelAttribute.Dexterity / 100);
+            return WeaponDamage * (1 + TotalAttributes().Dexterity / 100);
         }
     }
 }

@@ -48,14 +48,15 @@ namespace ConsoleBasedRpgGame.HeroRequirements
         {
             return 0;
         }
-        public void TotalAttributes()
+        public HeroAttribute TotalAttributes()
         {
             var EquippedArmor = equipment.Where(kvp => kvp.Key != Slots.Weapon).Select(kvp => (Armor?)kvp.Value);
-            Console.WriteLine(EquippedArmor.Aggregate(LevelAttribute, (acc, curr) =>
+
+            return EquippedArmor.Aggregate(LevelAttribute, (acc, curr) =>
             {
                 if (curr != null) return acc + curr.ArmorAttribute;
                 else return acc;
-            }));
+            });
         }
         public void Display()
         {

@@ -107,6 +107,19 @@ namespace UnitTester.CharacterTests
             Assert.Equal(expected, actual);
         }
         [Fact]
+        public void Weapon_Equipping_Replace_Successfull()
+        {
+            //Arrange
+            Weapon toReplace = new("weapon", 1, WeaponType.Wands, 5);
+            MageHeroTest.EquipW(StaffTest);
+            MageHeroTest.EquipW(toReplace);
+            Weapon expected = toReplace;
+            //Act
+            Weapon actual = (Weapon)MageHeroTest.Equipment[Slots.Weapon];
+            //Assert
+            Assert.Equal(expected, actual);
+        }
+        [Fact]
         public void Armor_Head_Equipment_Successfull()
         {
             //Arrange
@@ -163,6 +176,121 @@ namespace UnitTester.CharacterTests
             string expected = $"Your level is too low for this Helmet";
             //Act
             string actual = exception.Message;
+            //Assert
+            Assert.Equal(expected, actual);
+        }
+        [Fact]
+        public void Correct_Attributes_With_One_Armor()
+        {
+            //Arrange
+            Armor Helmet = new("commonHelmet", 1, Slots.Head, ArmorType.Cloth, new(1, 3, 4));
+            MageHeroTest.EquipA(Helmet);
+            string expected = JsonConvert.SerializeObject(new HeroAttribute(2, 4, 12));
+
+            //Act
+            string actual = JsonConvert.SerializeObject(MageHeroTest.TotalAttributes());
+            //Assert
+            Assert.Equal(expected, actual);
+        }
+        [Fact]
+        public void Correct_Attributes_With_Two_Armor()
+        {
+            //Arrange
+            Armor Helmet = new("commonHelmet", 1, Slots.Head, ArmorType.Cloth, new(1, 3, 4));
+            Armor Vest = new("CommonVest", 1, Slots.Body, ArmorType.Cloth, new(1, 2, 4));
+            MageHeroTest.EquipA(Helmet);
+            MageHeroTest.EquipA(Vest);
+            string expected = JsonConvert.SerializeObject(new HeroAttribute(3, 6, 16));
+
+            //Act
+            string actual = JsonConvert.SerializeObject(MageHeroTest.TotalAttributes());
+            //Assert
+            Assert.Equal(expected, actual);
+        }
+        [Fact]
+        public void Correct_Attributes_With_All_Armor()
+        {
+            //Arrange
+            Armor Helmet = new("commonHelmet", 1, Slots.Head, ArmorType.Cloth, new(1, 3, 4));
+            Armor Vest = new("CommonVest", 1, Slots.Body, ArmorType.Cloth, new(1, 2, 4));
+            Armor Pants = new("CommonPants", 1, Slots.Legs, ArmorType.Cloth, new(1, 2, 4));
+            MageHeroTest.EquipA(Helmet);
+            MageHeroTest.EquipA(Vest);
+            MageHeroTest.EquipA(Pants);
+            string expected = JsonConvert.SerializeObject(new HeroAttribute(4, 8, 20));
+
+            //Act
+            string actual = JsonConvert.SerializeObject(MageHeroTest.TotalAttributes());
+            //Assert
+            Assert.Equal(expected, actual);
+        }
+        [Fact]
+        public void Correct_Attributes_With_Replaced_Armor()
+        {
+            //Arrange
+            Armor Helmet = new("commonHelmet", 1, Slots.Head, ArmorType.Cloth, new(1, 3, 4));
+            Armor Vest = new("CommonVest", 1, Slots.Body, ArmorType.Cloth, new(1, 2, 4));
+            Armor Pants = new("CommonPants", 1, Slots.Legs, ArmorType.Cloth, new(1, 2, 4));
+            Armor NewVest = new("toreplace", 1, Slots.Body, ArmorType.Cloth, new(2, 3, 5));
+
+            MageHeroTest.EquipA(Helmet);
+            MageHeroTest.EquipA(Vest);
+            MageHeroTest.EquipA(Pants);
+            MageHeroTest.EquipA(NewVest);
+            string expected = JsonConvert.SerializeObject(new HeroAttribute(5, 9, 21));
+
+            //Act
+            string actual = JsonConvert.SerializeObject(MageHeroTest.TotalAttributes());
+            //Assert
+            Assert.Equal(expected, actual);
+        }
+        [Fact]
+        public void Correct_Damage_Without_Weapon()
+        {
+            //Arrange
+            double expected = 1;
+            //Act
+            double actual = MageHeroTest.Damage();
+            //Assert
+            Assert.Equal(expected, actual);
+        }
+        [Fact]
+        public void Correct_Damage_With_Weapon()
+        {
+            //Arrange
+            Weapon weapon = new("", 1, WeaponType.Staffs, 4);
+            MageHeroTest.EquipW(weapon);
+            double expected = 4;
+            //Act
+            double actual = MageHeroTest.Damage();
+            //Assert
+            Assert.Equal(expected, actual);
+        }
+        [Fact]
+        public void Correct_Damage_With_Weapon_Replaced()
+        {
+            //Arrange
+            Weapon weapon = new("", 1, WeaponType.Staffs, 4);
+            Weapon WeaponToReplace = new("", 1, WeaponType.Staffs, 6);
+            MageHeroTest.EquipW(weapon);
+            MageHeroTest.EquipW(WeaponToReplace);
+            double expected = 6;
+            //Act
+            double actual = MageHeroTest.Damage();
+            //Assert
+            Assert.Equal(expected, actual);
+        }
+        [Fact]
+        public void Correct_Damage_With_Weapon_And_Armor()
+        {
+            //Arrange
+            Weapon weapon = new("", 1, WeaponType.Staffs, 4);
+            Armor Armor = new("", 1, Slots.Body, ArmorType.Cloth, new(1, 1, 500));
+            MageHeroTest.EquipW(weapon);
+            MageHeroTest.EquipA(Armor);
+            double expected = 24;
+            //Act
+            double actual = MageHeroTest.Damage();
             //Assert
             Assert.Equal(expected, actual);
         }
