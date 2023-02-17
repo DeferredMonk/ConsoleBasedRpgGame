@@ -2,7 +2,7 @@
 
 namespace ConsoleBasedRpgGame.Exceptions
 {
-    internal class InvalidWeaponTypeExeption : Exception
+    public class InvalidWeaponTypeExeption : Exception
     {
         private Weapon CurrentWeapon { get; set; }
         private string CharacterRole { get; set; }

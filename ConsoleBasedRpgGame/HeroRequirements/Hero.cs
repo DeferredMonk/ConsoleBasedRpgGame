@@ -1,4 +1,5 @@
-﻿using ConsoleBasedRpgGame.Exceptions;
+﻿using System.Text;
+using ConsoleBasedRpgGame.Exceptions;
 using ConsoleBasedRpgGame.HeroRequirements.Items;
 using ConsoleBasedRpgGame.HeroRequirements.Items.ItemsEnums;
 
@@ -9,11 +10,13 @@ namespace ConsoleBasedRpgGame.HeroRequirements
         protected Dictionary<Slots, Item?> equipment = new Dictionary<Slots, Item?>();
         protected List<WeaponType> ValidWeaponTypes;
         protected List<ArmorType> ValidArmorTypes;
+        protected StringBuilder SB = new();
 
         public HeroAttribute LevelAttribute { get; set; }
         public int Level { get; set; }
-        public string? Name { get; set; }
+        public string Name { get; set; }
         public string CharacterRole { get; set; }
+        public Dictionary<Slots, Item?> Equipment { get => equipment; }
 
         public Hero(string name)
         {
@@ -27,46 +30,38 @@ namespace ConsoleBasedRpgGame.HeroRequirements
         }
         public void EquipW(Weapon weapon)
         {
-            try
-            {
-                if (Level < weapon.RequiredLevel) { throw new RequiredLevelException(weapon); }
-                else if (!ValidWeaponTypes.Contains(weapon.WeaponType)) { throw new InvalidWeaponTypeExeption(weapon, CharacterRole); }
+            if (Level < weapon.RequiredLevel) { throw new RequiredLevelException(weapon); }
+            else if (!ValidWeaponTypes.Contains(weapon.WeaponType)) { throw new InvalidWeaponTypeExeption(weapon, CharacterRole); }
 
-                equipment[0] = weapon;
-                Console.WriteLine($"{weapon.Name} equipped succesfully!");
-            }
-            catch (RequiredLevelException e) { Console.WriteLine(e.Message); }
-            catch (InvalidWeaponTypeExeption e) { Console.WriteLine(e.Message); }
+            equipment[0] = weapon;
+            Console.WriteLine($"{weapon.Name} equipped succesfully!");
         }
         public void EquipA(Armor armor)
         {
-            try
-            {
-                if (Level < armor.RequiredLevel) { throw new RequiredLevelException(armor); }
-                else if (!ValidArmorTypes.Contains(armor.ArmorType)) { throw new InvalidArmorTypeExeption(armor, CharacterRole); }
+            if (Level < armor.RequiredLevel) { throw new RequiredLevelException(armor); }
+            else if (!ValidArmorTypes.Contains(armor.ArmorType)) { throw new InvalidArmorTypeExeption(armor, CharacterRole); }
 
-                equipment[armor.Slot] = armor;
-                Console.WriteLine($"{armor.Name} equipped succesfully!");
-            }
-            catch (RequiredLevelException e) { Console.WriteLine(e.Message); }
-            catch (InvalidArmorTypeExeption e) { Console.WriteLine(e.Message); }
+            equipment[armor.Slot] = armor;
+            Console.WriteLine($"{armor.Name} equipped succesfully!");
         }
-        public virtual void Damage()
+        public virtual double Damage()
         {
-
+            return 0;
         }
-        public void TotalAttributes()
+        public HeroAttribute TotalAttributes()
         {
             var EquippedArmor = equipment.Where(kvp => kvp.Key != Slots.Weapon).Select(kvp => (Armor?)kvp.Value);
-            Console.WriteLine(EquippedArmor.Aggregate(LevelAttribute, (acc, curr) =>
+
+            return EquippedArmor.Aggregate(LevelAttribute, (acc, curr) =>
             {
                 if (curr != null) return acc + curr.ArmorAttribute;
                 else return acc;
-            }));
+            });
         }
-        public void Display()
+        public string Display()
         {
-
+            SB.Append($"Name: {this.Name} CLass: {this.CharacterRole} Level: {this.Level} Total strength: {this.LevelAttribute.Strength} Total dexterity: {this.LevelAttribute.Dexterity} Total intelligence: {this.LevelAttribute.Intelligence} Damage: {Damage()}");
+            return SB.ToString();
         }
         /// <summary>
         /// Adds to equipment dictionary 
