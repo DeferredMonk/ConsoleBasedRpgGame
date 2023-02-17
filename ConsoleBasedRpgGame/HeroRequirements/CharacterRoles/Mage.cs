@@ -29,7 +29,7 @@ namespace ConsoleBasedRpgGame.HeroRequirements.CharacterRoles
         /// the correct damage amount 
         /// based on correct damage attribute
         /// </summary>
-        public override void Damage()
+        public override double Damage()
         {
             Weapon weapon = (Weapon)equipment[Slots.Weapon];
             double WeaponDamage = weapon != null ? weapon.Damage : 1;
