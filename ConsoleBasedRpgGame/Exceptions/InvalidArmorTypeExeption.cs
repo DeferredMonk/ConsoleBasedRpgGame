@@ -2,7 +2,7 @@
 
 namespace ConsoleBasedRpgGame.Exceptions
 {
-    internal class InvalidArmorTypeExeption : Exception
+    public class InvalidArmorTypeExeption : Exception
     {
         private Armor CurrentArmor { get; set; }
         private string CharacterRole { get; set; }

@@ -19,12 +19,8 @@ Marco.EquipA(Helmet);
 Iida.EquipA(LeatherHelmet);
 Iida.EquipA(Pants);
 Iida.EquipA(Vest);
-for (int i = 0; i < 500; i++)
-{
-    Marco.LevelUp();
-}
-Console.WriteLine(Marco.Level);
-Weapon staff = new("super wand", 1, WeaponType.Staffs, 300);
+
+Weapon staff = new("super wand", 20, WeaponType.Staffs, 300);
 Marco.EquipW(staff);
 
 Marco.Damage();
