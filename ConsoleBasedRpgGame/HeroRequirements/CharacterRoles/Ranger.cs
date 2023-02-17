@@ -6,7 +6,7 @@ namespace ConsoleBasedRpgGame.HeroRequirements.CharacterRoles
     /// <summary>
     /// A Class that to create a hero class ranger
     /// </summary>
-    internal class Ranger : Hero
+    public class Ranger : Hero
     {
         public Ranger(string name) : base(name)
         {
@@ -24,18 +24,18 @@ namespace ConsoleBasedRpgGame.HeroRequirements.CharacterRoles
             base.LevelUp();
             this.LevelAttribute += new HeroAttribute(1, 5, 1);
         }
+
         /// <summary>
         /// Overrides Damage to calculate
         /// the correct damage amount 
         /// based on correct damage attribute
         /// </summary>
-        public override void Damage()
+
+        public override double Damage()
         {
             Weapon weapon = (Weapon)equipment[Slots.Weapon];
             double WeaponDamage = weapon != null ? weapon.Damage : 1;
-
-            var HeroDamage = WeaponDamage * (1 + LevelAttribute.Dexterity / 100);
-            Console.WriteLine(HeroDamage);
+            return WeaponDamage * (1 + TotalAttributes().Dexterity / 100);
         }
     }
 }

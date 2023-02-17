@@ -2,7 +2,7 @@
 
 namespace ConsoleBasedRpgGame.Exceptions
 {
-    internal class RequiredLevelException : Exception
+    public class RequiredLevelException : Exception
     {
         private Item CurrentItem { get; set; }
         public RequiredLevelException() { }

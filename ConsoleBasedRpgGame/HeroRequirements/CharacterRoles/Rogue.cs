@@ -1,4 +1,4 @@
-﻿using ConsoleBasedRpgGame.HeroRequirements.Items;
+using ConsoleBasedRpgGame.HeroRequirements.Items;
 using ConsoleBasedRpgGame.HeroRequirements.Items.ItemsEnums;
 
 namespace ConsoleBasedRpgGame.HeroRequirements.CharacterRoles
@@ -6,7 +6,7 @@ namespace ConsoleBasedRpgGame.HeroRequirements.CharacterRoles
     /// <summary>
     /// A Class that to create a hero class rogue
     /// </summary>
-    internal class Rogue : Hero
+    public class Rogue : Hero
     {
         public Rogue(string name) : base(name)
         {
@@ -29,13 +29,13 @@ namespace ConsoleBasedRpgGame.HeroRequirements.CharacterRoles
         /// the correct damage amount 
         /// based on correct damage attribute
         /// </summary>
-        public override void Damage()
+        public override double Damage()
         {
             Weapon weapon = (Weapon)equipment[Slots.Weapon];
             double WeaponDamage = weapon != null ? weapon.Damage : 1;
+            double HeroDamage = WeaponDamage * (1 + TotalAttributes().Dexterity / 100);
+            return HeroDamage;
 
-            var HeroDamage = WeaponDamage * (1 + LevelAttribute.Dexterity / 100);
-            Console.WriteLine(HeroDamage);
         }
     }
 }

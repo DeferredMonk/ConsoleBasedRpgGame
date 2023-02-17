@@ -34,8 +34,8 @@ namespace ConsoleBasedRpgGame.HeroRequirements.CharacterRoles
             Weapon weapon = (Weapon)equipment[Slots.Weapon];
             double WeaponDamage = weapon != null ? weapon.Damage : 1;
 
-            var HeroDamage = WeaponDamage * (1 + LevelAttribute.Intelligence / 100);
-            Console.WriteLine(HeroDamage);
+            double HeroDamage = WeaponDamage * (1 + TotalAttributes().Intelligence / 100);
+            return HeroDamage;
         }
     }
 }

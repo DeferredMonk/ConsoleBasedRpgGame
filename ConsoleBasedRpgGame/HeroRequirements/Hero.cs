@@ -1,4 +1,5 @@
-﻿using ConsoleBasedRpgGame.Exceptions;
+using System.Text;
+using ConsoleBasedRpgGame.Exceptions;
 using ConsoleBasedRpgGame.HeroRequirements.Items;
 using ConsoleBasedRpgGame.HeroRequirements.Items.ItemsEnums;
 
@@ -15,11 +16,13 @@ namespace ConsoleBasedRpgGame.HeroRequirements
         protected Dictionary<Slots, Item?> equipment = new Dictionary<Slots, Item?>();
         protected List<WeaponType> ValidWeaponTypes;
         protected List<ArmorType> ValidArmorTypes;
+        protected StringBuilder SB = new();
 
         public HeroAttribute LevelAttribute { get; set; }
         public int Level { get; set; }
-        public string? Name { get; set; }
+        public string Name { get; set; }
         public string CharacterRole { get; set; }
+        public Dictionary<Slots, Item?> Equipment { get => equipment; }
 
         public Hero(string name)
         {
@@ -56,33 +59,41 @@ namespace ConsoleBasedRpgGame.HeroRequirements
         /// <exception cref="InvalidArmorTypeExeption"></exception> If class cannot equip armor type
         public void EquipA(Armor armor)
         {
-
             if (Level < armor.RequiredLevel) { throw new RequiredLevelException(armor); }
             else if (!ValidArmorTypes.Contains(armor.ArmorType)) { throw new InvalidArmorTypeExeption(armor, CharacterRole); }
-
             equipment[armor.Slot] = armor;
             Console.WriteLine($"{armor.Name} equipped succesfully!");
-
         }
+        
+        
+       
+        
         /// <summary>
         /// Calculates damage of hero
         /// </summary>
-        public virtual void Damage() { }
+        public virtual double Damage()
+        {
+            return 0;
+        }
         /// <summary>
         /// Calculates total attributes
         /// </summary>
-        public void TotalAttributes()
+        public HeroAttribute TotalAttributes()
         {
             var EquippedArmor = equipment.Where(kvp => kvp.Key != Slots.Weapon).Select(kvp => (Armor?)kvp.Value);
-            Console.WriteLine(EquippedArmor.Aggregate(LevelAttribute, (acc, curr) =>
+            return EquippedArmor.Aggregate(LevelAttribute, (acc, curr) =>
             {
                 if (curr != null) return acc + curr.ArmorAttribute;
                 else return acc;
-            }));
+            });
         }
-        public void Display()
+        /// <summary>
+        /// Displays hero stats
+        /// </summary>
+        public string Display()
         {
-
+            SB.Append($"Name: {this.Name} CLass: {this.CharacterRole} Level: {this.Level} Total strength: {this.LevelAttribute.Strength} Total dexterity: {this.LevelAttribute.Dexterity} Total intelligence: {this.LevelAttribute.Intelligence} Damage: {Damage()}");
+            return SB.ToString();
         }
         /// <summary>
         /// Adds to equipment dictionary 
