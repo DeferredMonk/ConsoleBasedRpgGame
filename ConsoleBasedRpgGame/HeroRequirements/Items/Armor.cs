@@ -1,7 +1,9 @@
 ﻿using ConsoleBasedRpgGame.HeroRequirements.Items.ItemsEnums;
 
 namespace ConsoleBasedRpgGame.HeroRequirements.Items
-{
+{/// <summary>
+/// A class to create Armors
+/// </summary>
     public class Armor : Item
     {
         public Armor(string name, int requiredLevel, Slots slot, ArmorType armorType, HeroAttribute armorAttribute) : base(name, requiredLevel)

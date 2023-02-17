@@ -1,7 +1,9 @@
 ﻿using ConsoleBasedRpgGame.HeroRequirements.Items.ItemsEnums;
 
 namespace ConsoleBasedRpgGame.HeroRequirements.Items
-{
+{/// <summary>
+/// An abstract class to create items
+/// </summary>
     public abstract class Item
     {
         public string Name { get; set; }
